@@ -1,0 +1,13 @@
+.git
+.env
+.env.local
+.env.*.local
+backups
+logs
+secrets
+state
+moodle
+moodledata
+database
+redis
+.DS_Store

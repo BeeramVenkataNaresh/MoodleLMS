@@ -1,0 +1,28 @@
+# Local runtime configuration and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+secrets/
+
+# Local Docker/runtime state (named Docker volumes are used by default)
+moodle/
+moodledata/
+database/
+redis/
+state/
+
+# Generated operational artifacts
+backups/
+logs/
+*.log
+*.sql
+*.sql.gz
+*.tar
+*.tar.gz
+*.zip
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/
