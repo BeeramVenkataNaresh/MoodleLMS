@@ -1,0 +1,810 @@
+(() => {
+    'use strict';
+
+    const BASE =
+        `${window.location.origin}/local/nexusbranding`;
+
+    const LOGIN_URL =
+        `${window.location.origin}/login/index.php`;
+
+    const HERO_INTERVAL = 5000;
+
+    /*
+     * IMPORTANT:
+     * Hero 04 always starts first.
+     */
+    const HERO_IMAGES = [
+        `${BASE}/pix/hero-04.png`,
+        `${BASE}/pix/hero-01.png`,
+        `${BASE}/pix/hero-02.png`,
+        `${BASE}/pix/hero-03.png`,
+    ];
+
+
+    /* =================================================
+       PAGE DETECTION
+       ================================================= */
+
+    function path() {
+        let value =
+            window.location.pathname || '/';
+
+        value =
+            value.replace(/\/+$/, '');
+
+        return value || '/';
+    }
+
+
+    function isFrontPage() {
+        return (
+            path() === '/' ||
+            path() === '/index.php'
+        );
+    }
+
+
+    function isLoginPage() {
+        return (
+            path() === '/login' ||
+            path() === '/login/index.php'
+        );
+    }
+
+
+    /* =================================================
+       PRELOAD HERO
+       ================================================= */
+
+    function preloadHeroImages() {
+        if (!isFrontPage()) {
+            return;
+        }
+
+        HERO_IMAGES.forEach(
+            (source, index) => {
+
+                const image =
+                    new Image();
+
+                image.src =
+                    source;
+
+                image.decoding =
+                    'async';
+
+                if (index === 0) {
+                    image.fetchPriority =
+                        'high';
+                }
+            }
+        );
+    }
+
+
+    /* =================================================
+       NAVBAR LOGO
+       ================================================= */
+
+    function installNavbarLogo() {
+        if (isLoginPage()) {
+            return;
+        }
+
+        if (
+            document.querySelector(
+                '.nexus-navbar-brand'
+            )
+        ) {
+            return;
+        }
+
+        const oldBrand =
+            document.querySelector(
+                '.navbar-brand'
+            );
+
+        if (!oldBrand) {
+            return;
+        }
+
+        const link =
+            document.createElement('a');
+
+        link.className =
+            'nexus-navbar-brand';
+
+        link.href =
+            `${window.location.origin}/`;
+
+        link.setAttribute(
+            'aria-label',
+            'Nexus Education Private School'
+        );
+
+        const image =
+            document.createElement('img');
+
+        image.src =
+            `${BASE}/pix/logo.png`;
+
+        image.alt =
+            'Nexus Education Private School';
+
+        link.appendChild(image);
+
+        oldBrand.replaceWith(link);
+    }
+
+
+    /* =================================================
+       NAVBAR TITLE
+       ================================================= */
+
+    function installNavbarTitle() {
+        if (!isFrontPage()) {
+            return;
+        }
+
+        if (
+            document.querySelector(
+                '.nexus-nav-title'
+            )
+        ) {
+            return;
+        }
+
+        const navbar =
+            document.querySelector(
+                '.navbar'
+            );
+
+        if (!navbar) {
+            return;
+        }
+
+        const title =
+            document.createElement('div');
+
+        title.className =
+            'nexus-nav-title';
+
+        title.textContent =
+            'Nexus Education Private School';
+
+        navbar.appendChild(title);
+    }
+
+
+    /* =================================================
+       LOGIN LINK
+       ================================================= */
+
+    function fixLoginLinks() {
+        if (!isFrontPage()) {
+            return;
+        }
+
+        document
+            .querySelectorAll('a')
+            .forEach(link => {
+
+                const text =
+                    (
+                        link.textContent || ''
+                    )
+                        .trim()
+                        .toLowerCase();
+
+                const href =
+                    link.getAttribute(
+                        'href'
+                    ) || '';
+
+                if (
+                    text !== 'log in' &&
+                    text !== 'login' &&
+                    !href.includes(
+                        '/login/index.php'
+                    )
+                ) {
+                    return;
+                }
+
+                link.href =
+                    LOGIN_URL;
+            });
+    }
+
+
+    /* =================================================
+       HERO
+       ================================================= */
+
+    function createHero() {
+        if (!isFrontPage()) {
+            return;
+        }
+
+        if (
+            document.querySelector(
+                '.nexus-home-hero'
+            )
+        ) {
+            return;
+        }
+
+        const main =
+            document.querySelector(
+                '#region-main'
+            );
+
+        if (!main) {
+            return;
+        }
+
+
+        const hero =
+            document.createElement(
+                'section'
+            );
+
+        hero.className =
+            'nexus-home-hero';
+
+        hero.setAttribute(
+            'aria-label',
+            'Nexus Education Private School'
+        );
+
+
+        HERO_IMAGES.forEach(
+            (source, index) => {
+
+                const image =
+                    document.createElement(
+                        'img'
+                    );
+
+                image.className =
+                    'nexus-home-hero__image';
+
+                image.src =
+                    source;
+
+                image.alt = '';
+
+                image.decoding =
+                    'async';
+
+                if (index === 0) {
+
+                    image.classList.add(
+                        'is-active'
+                    );
+
+                    image.fetchPriority =
+                        'high';
+
+                    /*
+                     * Do not reveal hero until
+                     * first image is actually ready.
+                     */
+                    const reveal = () => {
+                        document.body
+                            .classList.add(
+                                'nexus-hero-ready'
+                            );
+                    };
+
+                    if (image.complete) {
+                        reveal();
+                    } else {
+                        image.addEventListener(
+                            'load',
+                            reveal,
+                            {
+                                once: true,
+                            }
+                        );
+
+                        /*
+                         * Safety fallback.
+                         */
+                        window.setTimeout(
+                            reveal,
+                            1500
+                        );
+                    }
+                }
+
+                hero.appendChild(
+                    image
+                );
+            }
+        );
+
+
+        const dots =
+            document.createElement(
+                'div'
+            );
+
+        dots.className =
+            'nexus-home-hero__dots';
+
+
+        HERO_IMAGES.forEach(
+            (_, index) => {
+
+                const dot =
+                    document.createElement(
+                        'button'
+                    );
+
+                dot.type =
+                    'button';
+
+                dot.className =
+                    'nexus-home-hero__dot';
+
+                dot.dataset.index =
+                    String(index);
+
+                dot.setAttribute(
+                    'aria-label',
+                    `Show banner ${index + 1}`
+                );
+
+                if (index === 0) {
+                    dot.classList.add(
+                        'is-active'
+                    );
+                }
+
+                dots.appendChild(
+                    dot
+                );
+            }
+        );
+
+
+        hero.appendChild(
+            dots
+        );
+
+        /*
+         * Insert Nexus hero BEFORE old Moove content.
+         *
+         * Original content remains hidden by CSS.
+         */
+        main.prepend(
+            hero
+        );
+
+        activateHero(
+            hero
+        );
+    }
+
+
+    function activateHero(hero) {
+        const images = [
+            ...hero.querySelectorAll(
+                '.nexus-home-hero__image'
+            ),
+        ];
+
+        const dots = [
+            ...hero.querySelectorAll(
+                '.nexus-home-hero__dot'
+            ),
+        ];
+
+        if (
+            images.length <= 1
+        ) {
+            return;
+        }
+
+        let current = 0;
+        let timer = null;
+
+
+        function show(index) {
+            current =
+                (
+                    index +
+                    images.length
+                ) % images.length;
+
+            images.forEach(
+                (image, i) => {
+
+                    image.classList.toggle(
+                        'is-active',
+                        i === current
+                    );
+                }
+            );
+
+            dots.forEach(
+                (dot, i) => {
+
+                    dot.classList.toggle(
+                        'is-active',
+                        i === current
+                    );
+                }
+            );
+        }
+
+
+        function stop() {
+            if (timer !== null) {
+
+                window.clearInterval(
+                    timer
+                );
+
+                timer = null;
+            }
+        }
+
+
+        function start() {
+            stop();
+
+            if (
+                document.hidden
+            ) {
+                return;
+            }
+
+            timer =
+                window.setInterval(
+                    () => {
+                        show(
+                            current + 1
+                        );
+                    },
+                    HERO_INTERVAL
+                );
+        }
+
+
+        dots.forEach(
+            dot => {
+
+                dot.addEventListener(
+                    'click',
+                    () => {
+
+                        show(
+                            Number(
+                                dot.dataset.index
+                            )
+                        );
+
+                        start();
+                    }
+                );
+            }
+        );
+
+
+        document.addEventListener(
+            'visibilitychange',
+            () => {
+
+                if (
+                    document.hidden
+                ) {
+                    stop();
+                } else {
+                    start();
+                }
+            }
+        );
+
+        start();
+    }
+
+
+    /* =================================================
+       LANDING FOOTER
+       ================================================= */
+
+    function installFooter() {
+        if (!isFrontPage()) {
+            return;
+        }
+
+        if (
+            document.querySelector(
+                '.nexus-footer'
+            )
+        ) {
+            return;
+        }
+
+        const root =
+            document.querySelector(
+                '#page-footer'
+            );
+
+        if (!root) {
+            return;
+        }
+
+        const footer =
+            document.createElement(
+                'div'
+            );
+
+        footer.className =
+            'nexus-footer';
+
+        footer.innerHTML = `
+            <div class="nexus-footer__inner">
+
+                <div class="nexus-footer__top">
+
+                    <div class="nexus-footer__brand">
+
+                        <img
+                            class="nexus-footer__logo"
+                            src="${BASE}/pix/logo.png"
+                            alt="Nexus Education Private School"
+                        >
+
+                        <p>
+                            A modern digital learning
+                            environment supporting students
+                            throughout their academic journey.
+                        </p>
+
+                    </div>
+
+                    <div class="nexus-footer__links">
+
+                        <div>
+                            <span class="nexus-footer__label">
+                                Portal
+                            </span>
+
+                            <a href="/">
+                                Home
+                            </a>
+
+                            <a href="${LOGIN_URL}">
+                                Student Login
+                            </a>
+                        </div>
+
+                        <div>
+                            <span class="nexus-footer__label">
+                                Support
+                            </span>
+
+                            <a href="${LOGIN_URL}">
+                                Learning Portal
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="nexus-footer__bottom">
+
+                    <span>
+                        © ${new Date().getFullYear()}
+                        Nexus Education Private School.
+                        All rights reserved.
+                    </span>
+
+                    <span>
+                        Secure Learning Portal
+                    </span>
+
+                </div>
+
+            </div>
+        `;
+
+        root.prepend(
+            footer
+        );
+    }
+
+
+    /* =================================================
+       LOGIN
+       ================================================= */
+
+    function createLoginBackButton() {
+        if (!isLoginPage()) {
+            return;
+        }
+
+        if (
+            document.querySelector(
+                '.nexus-login-back'
+            )
+        ) {
+            return;
+        }
+
+        const back =
+            document.createElement('a');
+
+        back.className =
+            'nexus-login-back';
+
+        back.href =
+            `${window.location.origin}/`;
+
+        back.innerHTML = `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path
+                    d="M15 18l-6-6 6-6"
+                />
+            </svg>
+
+            <span>
+                Back to home
+            </span>
+        `;
+
+        document.body.prepend(
+            back
+        );
+    }
+
+
+    function createLoginBrand() {
+        if (!isLoginPage()) {
+            return;
+        }
+
+        if (
+            document.querySelector(
+                '.nexus-login-brand'
+            )
+        ) {
+            return;
+        }
+
+        const container =
+            document.querySelector(
+                '.login-container'
+            );
+
+        if (!container) {
+            return;
+        }
+
+        const brand =
+            document.createElement(
+                'div'
+            );
+
+        brand.className =
+            'nexus-login-brand';
+
+        brand.innerHTML = `
+            <img
+                src="${BASE}/pix/logo.png"
+                alt="Nexus Education Private School"
+            >
+
+            <div class="nexus-login-brand__text">
+
+                <span>
+                    Learning Portal
+                </span>
+
+                <h1>
+                    Welcome back
+                </h1>
+
+                <p>
+                    Sign in to access your courses,
+                    assignments and learning dashboard.
+                </p>
+
+            </div>
+        `;
+
+        container.prepend(
+            brand
+        );
+    }
+
+
+    /* =================================================
+       BOOT
+       ================================================= */
+
+    function boot() {
+
+        if (
+            isLoginPage()
+        ) {
+            document.body
+                .classList.add(
+                    'nexus-login-page'
+                );
+
+            createLoginBackButton();
+            createLoginBrand();
+
+            window.NexusBranding = {
+                version:
+                    '3.0.0',
+                page:
+                    'login',
+            };
+
+            return;
+        }
+
+
+        installNavbarLogo();
+
+
+        if (
+            isFrontPage()
+        ) {
+            document.body
+                .classList.add(
+                    'nexus-landing-page'
+                );
+
+            preloadHeroImages();
+
+            createHero();
+
+            installNavbarTitle();
+
+            fixLoginLinks();
+
+            installFooter();
+        }
+
+
+        window.NexusBranding = {
+            version:
+                '3.0.0',
+
+            page:
+                isFrontPage()
+                    ? 'landing'
+                    : 'moodle',
+
+            heroInterval:
+                HERO_INTERVAL,
+
+            heroImages:
+                HERO_IMAGES,
+        };
+    }
+
+
+    if (
+        document.readyState ===
+        'loading'
+    ) {
+        document.addEventListener(
+            'DOMContentLoaded',
+            boot
+        );
+    } else {
+        boot();
+    }
+
+})();

@@ -1,0 +1,858 @@
+:root {
+    --nexus-bg: #f7f9fc;
+    --nexus-surface: rgba(255, 255, 255, 0.94);
+    --nexus-border: rgba(15, 23, 42, 0.07);
+    --nexus-text: #172033;
+    --nexus-muted: #667085;
+    --nexus-blue: #1554b8;
+}
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+html,
+body {
+    background:
+        linear-gradient(
+            180deg,
+            #fbfcfe 0%,
+            #f6f8fb 100%
+        ) !important;
+
+    color: var(--nexus-text);
+}
+
+
+/* =====================================================
+   PRIMARY NAVBAR
+   ===================================================== */
+
+.navbar,
+.navbar.fixed-top {
+    background:
+        rgba(255, 255, 255, 0.94) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.055);
+
+    box-shadow:
+        0 2px 12px rgba(15, 23, 42, 0.035);
+
+    backdrop-filter:
+        blur(14px) saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(14px) saturate(140%);
+}
+
+
+/* Logo */
+
+.nexus-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+
+    margin-right: 1.4rem;
+
+    text-decoration: none !important;
+}
+
+.nexus-navbar-brand img {
+    display: block;
+
+    width: auto;
+    height: 34px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   SECONDARY NAVIGATION
+   ===================================================== */
+
+.secondary-navigation {
+    background:
+        rgba(255, 255, 255, 0.97) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.06) !important;
+
+    box-shadow: none !important;
+}
+
+.secondary-navigation .navigation {
+    background: transparent !important;
+}
+
+.secondary-navigation .nav-link {
+    color: #475467 !important;
+
+    font-weight: 500;
+
+    background: transparent !important;
+}
+
+.secondary-navigation .nav-link.active {
+    color: var(--nexus-blue) !important;
+
+    border-bottom:
+        2px solid var(--nexus-blue) !important;
+}
+
+
+/* =====================================================
+   CONTENT
+   ===================================================== */
+
+#region-main,
+#page-content .card {
+    box-shadow: none !important;
+}
+
+.card,
+.block,
+.dashboard-card {
+    background:
+        rgba(255, 255, 255, 0.97) !important;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06) !important;
+
+    border-radius:
+        14px !important;
+
+    box-shadow:
+        0 4px 18px rgba(15, 23, 42, 0.035) !important;
+}
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+.nexus-home-hero {
+    position: relative;
+
+    width: min(
+        calc(100% - 36px),
+        1280px
+    );
+
+    aspect-ratio: 16 / 9;
+
+    margin:
+        28px auto 42px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    border-radius: 18px;
+
+    background: #edf1f6;
+
+    box-shadow:
+        0 10px 34px rgba(15, 23, 42, 0.065);
+}
+
+
+/* Hero images */
+
+.nexus-home-hero__image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transform: none !important;
+
+    transition:
+        opacity 550ms ease;
+}
+
+.nexus-home-hero__image.is-active {
+    opacity: 1;
+}
+
+
+/* Remove old dark overlay/content */
+
+.nexus-home-hero::after,
+.nexus-home-hero__content,
+.nexus-home-hero__glass,
+.nexus-home-hero__logo,
+.nexus-home-hero h1,
+.nexus-home-hero p {
+    display: none !important;
+}
+
+
+/* Slider dots */
+
+.nexus-home-hero__dots {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 50%;
+    bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    transform:
+        translateX(-50%);
+}
+
+.nexus-home-hero__dot {
+    width: 6px;
+    height: 6px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.68);
+
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.10);
+
+    transition:
+        width 160ms ease,
+        background 160ms ease;
+}
+
+.nexus-home-hero__dot.is-active {
+    width: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.98);
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.block_myoverview input[type="search"],
+.block_myoverview .form-control {
+    background:
+        rgba(255, 255, 255, 0.98);
+
+    border:
+        1px solid rgba(21, 84, 184, 0.30);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 5px 16px rgba(21, 84, 184, 0.06);
+}
+
+.block_myoverview input[type="search"]:focus,
+.block_myoverview .form-control:focus {
+    border-color:
+        rgba(21, 84, 184, 0.68);
+
+    box-shadow:
+        0 0 0 3px rgba(21, 84, 184, 0.09);
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.btn {
+    border-radius:
+        10px !important;
+
+    box-shadow:
+        none !important;
+}
+
+.btn-primary {
+    background:
+        #1554b8 !important;
+
+    border-color:
+        #1554b8 !important;
+}
+
+
+/* =====================================================
+   DROPDOWNS / NOTIFICATIONS
+   ===================================================== */
+
+.dropdown-menu,
+.popover-region-container {
+    background:
+        rgba(255, 255, 255, 0.985) !important;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.07) !important;
+
+    border-radius:
+        14px !important;
+
+    box-shadow:
+        0 14px 36px rgba(15, 23, 42, 0.10) !important;
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+}
+
+
+/* =====================================================
+   FINAL FOOTER
+   ===================================================== */
+
+.nexus-footer {
+    margin-top: 44px;
+
+    padding:
+        38px 24px 24px;
+
+    background:
+        #f8fafc;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    color:
+        #475467;
+}
+
+.nexus-footer__inner {
+    width:
+        min(1180px, 100%);
+
+    margin: 0 auto;
+}
+
+.nexus-footer__logo {
+    display: block;
+
+    width: 180px;
+    max-width: 60%;
+
+    height: auto;
+
+    margin-bottom: 14px;
+}
+
+.nexus-footer__description {
+    max-width: 530px;
+
+    color:
+        #667085;
+
+    line-height: 1.65;
+
+    font-size: 0.95rem;
+}
+
+.nexus-footer__bottom {
+    margin-top: 26px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.07);
+
+    color:
+        #98a2b3;
+
+    font-size: 0.85rem;
+}
+
+
+/* =====================================================
+   REMOVE MOOVE DEFAULT FOOTER CONTENT
+   ===================================================== */
+
+#page-footer > .container,
+#page-footer .footer-content-popover,
+#page-footer .footer-support-link,
+#page-footer .footer-section,
+#page-footer .footer-powered-by,
+#page-footer .madeby,
+#page-footer [class*="madeby"] {
+    display: none !important;
+}
+
+#page-footer {
+    background:
+        transparent !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+}
+
+
+/* =====================================================
+   FRONT PAGE CLEANUP
+   ===================================================== */
+
+body.pagelayout-frontpage .marketing,
+body.pagelayout-frontpage .features,
+body.pagelayout-frontpage .feature,
+body.pagelayout-frontpage .numbers,
+body.pagelayout-frontpage .stats,
+body.pagelayout-frontpage .clients,
+body.pagelayout-frontpage .testimonials,
+body.pagelayout-frontpage section[class*="feature"],
+body.pagelayout-frontpage section[class*="marketing"],
+body.pagelayout-frontpage section[class*="number"],
+body.pagelayout-frontpage section[class*="stat"],
+body.pagelayout-frontpage section[class*="client"],
+body.pagelayout-frontpage section[class*="testimonial"] {
+    display: none !important;
+}
+
+body.pagelayout-frontpage #frontpage-course-list,
+body.pagelayout-frontpage #frontpage-category-names,
+body.pagelayout-frontpage #frontpage-category-combo,
+body.pagelayout-frontpage #frontpage-available-course-list,
+body.pagelayout-frontpage .course-search {
+    display: none !important;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 767.98px) {
+
+    .nexus-navbar-brand img {
+        height: 29px;
+    }
+
+    .nexus-home-hero {
+        width:
+            calc(100% - 18px);
+
+        margin:
+            16px auto 28px;
+
+        border-radius:
+            14px;
+    }
+
+    .nexus-footer {
+        padding:
+            30px 18px 20px;
+    }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition-duration:
+            0.01ms !important;
+
+        animation-duration:
+            0.01ms !important;
+    }
+
+}
+
+/* =====================================================
+   FINAL NEXUS HOMEPAGE OVERRIDES
+   ===================================================== */
+
+body.pagelayout-frontpage {
+    background: #f7f9fc !important;
+}
+
+body.pagelayout-frontpage #page {
+    background: transparent !important;
+}
+
+/* Hero first, image only */
+
+.nexus-home-hero {
+    position: relative;
+
+    width: min(
+        calc(100% - 32px),
+        1320px
+    );
+
+    aspect-ratio: 16 / 9;
+
+    margin: 28px auto 48px;
+
+    overflow: hidden;
+
+    background: #eef2f6;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 34px rgba(15, 23, 42, 0.06);
+}
+
+.nexus-home-hero__image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transition:
+        opacity 650ms ease;
+
+    transform: none !important;
+}
+
+.nexus-home-hero__image.is-active {
+    opacity: 1;
+}
+
+.nexus-home-hero::after,
+.nexus-home-hero__content,
+.nexus-home-hero__glass,
+.nexus-home-hero h1,
+.nexus-home-hero p {
+    display: none !important;
+}
+
+/* Minimal slider indicators */
+
+.nexus-home-hero__dots {
+    position: absolute;
+
+    left: 50%;
+    bottom: 14px;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    transform: translateX(-50%);
+}
+
+.nexus-home-hero__dot {
+    width: 7px;
+    height: 7px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.65);
+
+    transition:
+        width 160ms ease,
+        background 160ms ease;
+}
+
+.nexus-home-hero__dot.is-active {
+    width: 19px;
+
+    background: #ffffff;
+}
+
+/* Kill remaining Moove demo content */
+
+body.pagelayout-frontpage
+[id*="marketing"],
+
+body.pagelayout-frontpage
+[class*="marketing"],
+
+body.pagelayout-frontpage
+[id*="feature"],
+
+body.pagelayout-frontpage
+[class*="feature"],
+
+body.pagelayout-frontpage
+[id*="testimonial"],
+
+body.pagelayout-frontpage
+[class*="testimonial"],
+
+body.pagelayout-frontpage
+[id*="stat"],
+
+body.pagelayout-frontpage
+[class*="stat"] {
+    display: none !important;
+}
+
+/* Light premium navbar */
+
+.navbar,
+.navbar.fixed-top {
+    background:
+        rgba(255, 255, 255, 0.94) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    box-shadow:
+        0 2px 12px rgba(15, 23, 42, 0.035);
+
+    backdrop-filter:
+        blur(14px) saturate(135%);
+
+    -webkit-backdrop-filter:
+        blur(14px) saturate(135%);
+}
+
+/* Minimal footer */
+
+.nexus-footer {
+    background: #ffffff;
+
+    color: #667085;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    padding:
+        28px 24px;
+}
+
+.nexus-footer__inner {
+    width: min(1180px, 100%);
+
+    margin: 0 auto;
+}
+
+.nexus-footer__logo {
+    display: block;
+
+    width: 150px;
+    height: auto;
+
+    margin-bottom: 16px;
+}
+
+.nexus-footer__bottom {
+    padding-top: 14px;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    color: #98a2b3;
+
+    font-size: 0.85rem;
+}
+
+/* Mobile */
+
+@media (max-width: 767.98px) {
+
+    .nexus-home-hero {
+        width:
+            calc(100% - 18px);
+
+        margin:
+            16px auto 28px;
+
+        border-radius:
+            14px;
+    }
+
+}
+
+
+/* =====================================================
+   SAFE MOOVE DEMO CLEANUP
+   Elements stay in DOM for Moodle/Moove JS.
+   ===================================================== */
+
+body.pagelayout-frontpage
+.nexus-hide-demo-section,
+
+body.pagelayout-frontpage
+.nexus-hide-demo-card {
+    display: none !important;
+}
+
+
+/* Do not expose empty demo spacing */
+
+body.pagelayout-frontpage
+.nexus-hide-demo-section + .nexus-hide-demo-section {
+    margin-top: 0 !important;
+}
+
+
+/* =====================================================
+   FINAL MINIMAL HERO
+   ===================================================== */
+
+body.pagelayout-frontpage
+.nexus-home-hero {
+    position: relative;
+
+    display: block;
+
+    width:
+        min(
+            calc(100% - 32px),
+            1320px
+        );
+
+    aspect-ratio: 16 / 9;
+
+    margin:
+        28px auto 42px;
+
+    overflow: hidden;
+
+    background: #f1f4f8;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 32px
+        rgba(15, 23, 42, 0.055);
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__image {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transform: none !important;
+
+    transition:
+        opacity 650ms ease;
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__image.is-active {
+    opacity: 1;
+}
+
+
+/* No overlay and no text */
+
+body.pagelayout-frontpage
+.nexus-home-hero::before,
+
+body.pagelayout-frontpage
+.nexus-home-hero::after,
+
+body.pagelayout-frontpage
+.nexus-home-hero__content,
+
+body.pagelayout-frontpage
+.nexus-home-hero__glass {
+    display: none !important;
+}
+
+
+/* Minimal indicators */
+
+body.pagelayout-frontpage
+.nexus-home-hero__dots {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__dot {
+    display: block;
+
+    width: 7px;
+    height: 7px;
+
+    min-width: 0;
+
+    padding: 0;
+
+    appearance: none;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.68);
+
+    box-shadow:
+        0 1px 4px
+        rgba(0, 0, 0, 0.10);
+
+    transition:
+        width 180ms ease,
+        background 180ms ease;
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__dot.is-active {
+    width: 20px;
+
+    background: #ffffff;
+}
