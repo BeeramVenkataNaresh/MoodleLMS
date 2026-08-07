@@ -1,20 +1,30 @@
-# Local runtime configuration and secrets
+#############################################
+# Environment & Secrets
+#############################################
+
 .env
 .env.local
 .env.*.local
 !.env.example
+
 secrets/
 
-# Local Docker/runtime state (named Docker volumes are used by default)
-moodle/
+#############################################
+# Runtime Data (Ignore)
+#############################################
+
 moodledata/
 database/
 redis/
 state/
 
-# Generated operational artifacts
+#############################################
+# Backups & Logs
+#############################################
+
 backups/
 logs/
+
 *.log
 *.sql
 *.sql.gz
@@ -22,9 +32,22 @@ logs/
 *.tar.gz
 *.zip
 
-# OS and editor files
+#############################################
+# Dependencies
+#############################################
+
+node_modules/
+
+#############################################
+# OS / IDE
+#############################################
+
 .DS_Store
 .idea/
 .vscode/
 
-node_modules/
+#############################################
+# Ignore Git internals inside Docker volumes
+#############################################
+
+moodle/.git/
