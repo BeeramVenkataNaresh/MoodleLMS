@@ -53,6 +53,12 @@ const departments = [
     slug: "secondary-arts",
     url: "https://www.dcp.edu.gov.on.ca/en/curriculum/secondary-arts/courses-list",
   },,
+  {
+    name: "Technological Education",
+    slug: "technological-education",
+    url: "https://www.dcp.edu.gov.on.ca/en/curriculum/technological-education/courses-list",
+  },
+
 ];
 
 const requestedSlug = process.argv[2] ?? "all";
