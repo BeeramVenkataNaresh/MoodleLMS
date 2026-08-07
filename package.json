@@ -1,0 +1,27 @@
+{
+  "name": "nexus-moodle-lms",
+  "version": "1.0.0",
+  "description": "This repository provides the complete free, local Docker Desktop environment for the Nexus Education Private School Moodle LMS. It runs Moodle 4.5 LTS with PHP 8.3 + Apache, MariaDB, Redis, Moodle cron, Mailpit, and phpMyAdmin on an Apple Silicon Mac.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MSPixelPulseAgency/nexus-moodle-lms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MSPixelPulseAgency/nexus-moodle-lms/issues"
+  },
+  "homepage": "https://github.com/MSPixelPulseAgency/nexus-moodle-lms#readme",
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}
