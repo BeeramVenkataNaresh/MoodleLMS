@@ -48,6 +48,11 @@ const departments = [
     name: "Health and Physical Education",
     url: "https://www.dcp.edu.gov.on.ca/en/curriculum/secondary-hpe/courses-list",
   },
+  {
+    name: "The Arts",
+    slug: "secondary-arts",
+    url: "https://www.dcp.edu.gov.on.ca/en/curriculum/secondary-arts/courses-list",
+  },,
 ];
 
 const requestedSlug = process.argv[2] ?? "all";
