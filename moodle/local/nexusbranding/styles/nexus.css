@@ -4887,3 +4887,203 @@ body.pagelayout-frontpage
     }
 
 }
+
+
+/* ==========================================================
+   NEXUS LANDING — SPACING + FOOTER FINAL FIX
+   ========================================================== */
+
+
+/* Remove excessive top space above the hero */
+body.pagelayout-frontpage
+#page {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+body.pagelayout-frontpage
+#page-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+body.pagelayout-frontpage
+#mooveslideshow {
+    margin-top: 10px !important;
+    padding-top: 0 !important;
+}
+
+
+/*
+ * If Moove inserts an empty spacing/container above slider,
+ * collapse it.
+ */
+body.pagelayout-frontpage
+#page-content > .container-fluid:first-child,
+
+body.pagelayout-frontpage
+#page-content > .container:first-child {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+/* Keep hero closer to navbar */
+body.pagelayout-frontpage
+#moove-carousel,
+
+body.pagelayout-frontpage
+#mooveslideshow .carousel {
+    margin-top: 0 !important;
+}
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+body.pagelayout-frontpage
+#page-footer {
+    display: block !important;
+
+    width: 100% !important;
+
+    margin: 24px 0 0 !important;
+
+    padding: 0 !important;
+
+    position: relative !important;
+
+    min-height: 0 !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f3f82 0%,
+            #155ac0 55%,
+            #2b7de9 100%
+        ) !important;
+
+    color: #fff !important;
+}
+
+
+/*
+ * Hide Moove's original footer content if present.
+ * We'll show the Nexus footer cleanly.
+ */
+body.pagelayout-frontpage
+#page-footer > * {
+    display: none !important;
+}
+
+
+/* Create our footer visually with CSS */
+body.pagelayout-frontpage
+#page-footer::before {
+    content:
+        "NEXUS  •  Nexus Education Private School";
+
+    display: block;
+
+    max-width: 1240px;
+
+    margin: 0 auto;
+
+    padding:
+        30px 28px 16px;
+
+    font-size:
+        18px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        -0.01em;
+
+    color:
+        #ffffff;
+}
+
+
+body.pagelayout-frontpage
+#page-footer::after {
+    content:
+        "A modern digital learning environment supporting students throughout their academic journey.   ·   © 2026 Nexus Education Private School. All rights reserved.";
+
+    display: block;
+
+    max-width: 1240px;
+
+    margin: 0 auto;
+
+    padding:
+        0 28px 30px;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+    color:
+        rgba(255,255,255,.78);
+
+    border-top:
+        1px solid rgba(255,255,255,.14);
+}
+
+
+/* Remove any giant blank area before footer */
+body.pagelayout-frontpage
+#page-wrapper,
+
+body.pagelayout-frontpage
+#page,
+
+body.pagelayout-frontpage
+#page-content,
+
+body.pagelayout-frontpage
+#region-main-box,
+
+body.pagelayout-frontpage
+#region-main {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+
+/* Mobile */
+@media (max-width: 767.98px) {
+
+    body.pagelayout-frontpage
+    #mooveslideshow {
+        margin-top:
+            6px !important;
+    }
+
+
+    body.pagelayout-frontpage
+    #page-footer::before {
+        padding:
+            24px 18px 14px;
+
+        font-size:
+            16px;
+    }
+
+
+    body.pagelayout-frontpage
+    #page-footer::after {
+        padding:
+            0 18px 24px;
+
+        font-size:
+            13px;
+    }
+
+}

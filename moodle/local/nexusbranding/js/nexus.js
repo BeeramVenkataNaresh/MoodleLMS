@@ -402,6 +402,7 @@
             installNavTitle();
             fixLoginLinks();
             waitForMooveCarousel();
+        installNexusFooter();
         }
     }
 
@@ -418,3 +419,160 @@
     }
 
 })();
+
+/* ==========================================================
+   NEXUS PREMIUM FOOTER
+   ========================================================== */
+
+function installNexusFooter() {
+    if (!isHome()) {
+        return;
+    }
+
+    const footerRoot =
+        document.querySelector('#page-footer');
+
+    if (!footerRoot) {
+        return;
+    }
+
+    if (
+        footerRoot.querySelector(
+            '.nexus-footer-rich'
+        )
+    ) {
+        return;
+    }
+
+    const footer =
+        document.createElement('div');
+
+    footer.className =
+        'nexus-footer-rich';
+
+    footer.innerHTML = `
+        <div class="nexus-footer-rich__inner">
+
+            <div class="nexus-footer-rich__top">
+
+                <div class="nexus-footer-rich__brand">
+
+                    <img
+                        src="${BASE}/pix/logo.png"
+                        alt="Nexus Education Private School"
+                        class="nexus-footer-rich__logo"
+                    >
+
+                    <p>
+                        A modern learning environment supporting
+                        student achievement, confidence and future success.
+                    </p>
+
+                    <a
+                        href="https://nexuseps.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="nexus-footer-rich__website"
+                    >
+                        Visit nexuseps.com
+                    </a>
+
+                </div>
+
+
+                <div class="nexus-footer-rich__nav">
+
+                    <div class="nexus-footer-rich__column">
+
+                        <h3>Learning Portal</h3>
+
+                        <a href="${HOME_URL}">
+                            Home
+                        </a>
+
+                        <a href="${LOGIN_URL}">
+                            Student Login
+                        </a>
+
+                    </div>
+
+
+                    <div class="nexus-footer-rich__column">
+
+                        <h3>Nexus EPS</h3>
+
+                        <a
+                            href="https://nexuseps.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            School Website
+                        </a>
+
+                        <a
+                            href="https://nexuseps.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Programs
+                        </a>
+
+                        <a
+                            href="https://nexuseps.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Contact Us
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nexus-footer-rich__divider"></div>
+
+
+            <div class="nexus-footer-rich__bottom">
+
+                <p>
+                    © ${new Date().getFullYear()}
+                    Nexus Education Private School.
+                    All rights reserved.
+                </p>
+
+                <div class="nexus-footer-rich__social">
+
+                    <a
+                        href="https://nexuseps.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Nexus EPS website"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M3 12h18"></path>
+                            <path d="M12 3a15 15 0 0 1 0 18"></path>
+                            <path d="M12 3a15 15 0 0 0 0 18"></path>
+                        </svg>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    footerRoot.innerHTML = '';
+
+    footerRoot.appendChild(
+        footer
+    );
+}
+
