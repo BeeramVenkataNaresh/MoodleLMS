@@ -1,0 +1,1511 @@
+:root {
+    --nexus-bg: #f7f9fc;
+    --nexus-surface: rgba(255, 255, 255, 0.94);
+    --nexus-border: rgba(15, 23, 42, 0.07);
+    --nexus-text: #172033;
+    --nexus-muted: #667085;
+    --nexus-blue: #1554b8;
+}
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+html,
+body {
+    background:
+        linear-gradient(
+            180deg,
+            #fbfcfe 0%,
+            #f6f8fb 100%
+        ) !important;
+
+    color: var(--nexus-text);
+}
+
+
+/* =====================================================
+   PRIMARY NAVBAR
+   ===================================================== */
+
+.navbar,
+.navbar.fixed-top {
+    background:
+        rgba(255, 255, 255, 0.94) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.055);
+
+    box-shadow:
+        0 2px 12px rgba(15, 23, 42, 0.035);
+
+    backdrop-filter:
+        blur(14px) saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(14px) saturate(140%);
+}
+
+
+/* Logo */
+
+.nexus-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+
+    margin-right: 1.4rem;
+
+    text-decoration: none !important;
+}
+
+.nexus-navbar-brand img {
+    display: block;
+
+    width: auto;
+    height: 34px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   SECONDARY NAVIGATION
+   ===================================================== */
+
+.secondary-navigation {
+    background:
+        rgba(255, 255, 255, 0.97) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.06) !important;
+
+    box-shadow: none !important;
+}
+
+.secondary-navigation .navigation {
+    background: transparent !important;
+}
+
+.secondary-navigation .nav-link {
+    color: #475467 !important;
+
+    font-weight: 500;
+
+    background: transparent !important;
+}
+
+.secondary-navigation .nav-link.active {
+    color: var(--nexus-blue) !important;
+
+    border-bottom:
+        2px solid var(--nexus-blue) !important;
+}
+
+
+/* =====================================================
+   CONTENT
+   ===================================================== */
+
+#region-main,
+#page-content .card {
+    box-shadow: none !important;
+}
+
+.card,
+.block,
+.dashboard-card {
+    background:
+        rgba(255, 255, 255, 0.97) !important;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06) !important;
+
+    border-radius:
+        14px !important;
+
+    box-shadow:
+        0 4px 18px rgba(15, 23, 42, 0.035) !important;
+}
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+.nexus-home-hero {
+    position: relative;
+
+    width: min(
+        calc(100% - 36px),
+        1280px
+    );
+
+    aspect-ratio: 16 / 9;
+
+    margin:
+        28px auto 42px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    border-radius: 18px;
+
+    background: #edf1f6;
+
+    box-shadow:
+        0 10px 34px rgba(15, 23, 42, 0.065);
+}
+
+
+/* Hero images */
+
+.nexus-home-hero__image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transform: none !important;
+
+    transition:
+        opacity 550ms ease;
+}
+
+.nexus-home-hero__image.is-active {
+    opacity: 1;
+}
+
+
+/* Remove old dark overlay/content */
+
+.nexus-home-hero::after,
+.nexus-home-hero__content,
+.nexus-home-hero__glass,
+.nexus-home-hero__logo,
+.nexus-home-hero h1,
+.nexus-home-hero p {
+    display: none !important;
+}
+
+
+/* Slider dots */
+
+.nexus-home-hero__dots {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 50%;
+    bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    transform:
+        translateX(-50%);
+}
+
+.nexus-home-hero__dot {
+    width: 6px;
+    height: 6px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.68);
+
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.10);
+
+    transition:
+        width 160ms ease,
+        background 160ms ease;
+}
+
+.nexus-home-hero__dot.is-active {
+    width: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.98);
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.block_myoverview input[type="search"],
+.block_myoverview .form-control {
+    background:
+        rgba(255, 255, 255, 0.98);
+
+    border:
+        1px solid rgba(21, 84, 184, 0.30);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 5px 16px rgba(21, 84, 184, 0.06);
+}
+
+.block_myoverview input[type="search"]:focus,
+.block_myoverview .form-control:focus {
+    border-color:
+        rgba(21, 84, 184, 0.68);
+
+    box-shadow:
+        0 0 0 3px rgba(21, 84, 184, 0.09);
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.btn {
+    border-radius:
+        10px !important;
+
+    box-shadow:
+        none !important;
+}
+
+.btn-primary {
+    background:
+        #1554b8 !important;
+
+    border-color:
+        #1554b8 !important;
+}
+
+
+/* =====================================================
+   DROPDOWNS / NOTIFICATIONS
+   ===================================================== */
+
+.dropdown-menu,
+.popover-region-container {
+    background:
+        rgba(255, 255, 255, 0.985) !important;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.07) !important;
+
+    border-radius:
+        14px !important;
+
+    box-shadow:
+        0 14px 36px rgba(15, 23, 42, 0.10) !important;
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+}
+
+
+/* =====================================================
+   FINAL FOOTER
+   ===================================================== */
+
+.nexus-footer {
+    margin-top: 44px;
+
+    padding:
+        38px 24px 24px;
+
+    background:
+        #f8fafc;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    color:
+        #475467;
+}
+
+.nexus-footer__inner {
+    width:
+        min(1180px, 100%);
+
+    margin: 0 auto;
+}
+
+.nexus-footer__logo {
+    display: block;
+
+    width: 180px;
+    max-width: 60%;
+
+    height: auto;
+
+    margin-bottom: 14px;
+}
+
+.nexus-footer__description {
+    max-width: 530px;
+
+    color:
+        #667085;
+
+    line-height: 1.65;
+
+    font-size: 0.95rem;
+}
+
+.nexus-footer__bottom {
+    margin-top: 26px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.07);
+
+    color:
+        #98a2b3;
+
+    font-size: 0.85rem;
+}
+
+
+/* =====================================================
+   REMOVE MOOVE DEFAULT FOOTER CONTENT
+   ===================================================== */
+
+#page-footer > .container,
+#page-footer .footer-content-popover,
+#page-footer .footer-support-link,
+#page-footer .footer-section,
+#page-footer .footer-powered-by,
+#page-footer .madeby,
+#page-footer [class*="madeby"] {
+    display: none !important;
+}
+
+#page-footer {
+    background:
+        transparent !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+}
+
+
+/* =====================================================
+   FRONT PAGE CLEANUP
+   ===================================================== */
+
+body.pagelayout-frontpage .marketing,
+body.pagelayout-frontpage .features,
+body.pagelayout-frontpage .feature,
+body.pagelayout-frontpage .numbers,
+body.pagelayout-frontpage .stats,
+body.pagelayout-frontpage .clients,
+body.pagelayout-frontpage .testimonials,
+body.pagelayout-frontpage section[class*="feature"],
+body.pagelayout-frontpage section[class*="marketing"],
+body.pagelayout-frontpage section[class*="number"],
+body.pagelayout-frontpage section[class*="stat"],
+body.pagelayout-frontpage section[class*="client"],
+body.pagelayout-frontpage section[class*="testimonial"] {
+    display: none !important;
+}
+
+body.pagelayout-frontpage #frontpage-course-list,
+body.pagelayout-frontpage #frontpage-category-names,
+body.pagelayout-frontpage #frontpage-category-combo,
+body.pagelayout-frontpage #frontpage-available-course-list,
+body.pagelayout-frontpage .course-search {
+    display: none !important;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 767.98px) {
+
+    .nexus-navbar-brand img {
+        height: 29px;
+    }
+
+    .nexus-home-hero {
+        width:
+            calc(100% - 18px);
+
+        margin:
+            16px auto 28px;
+
+        border-radius:
+            14px;
+    }
+
+    .nexus-footer {
+        padding:
+            30px 18px 20px;
+    }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition-duration:
+            0.01ms !important;
+
+        animation-duration:
+            0.01ms !important;
+    }
+
+}
+
+/* =====================================================
+   FINAL NEXUS HOMEPAGE OVERRIDES
+   ===================================================== */
+
+body.pagelayout-frontpage {
+    background: #f7f9fc !important;
+}
+
+body.pagelayout-frontpage #page {
+    background: transparent !important;
+}
+
+/* Hero first, image only */
+
+.nexus-home-hero {
+    position: relative;
+
+    width: min(
+        calc(100% - 32px),
+        1320px
+    );
+
+    aspect-ratio: 16 / 9;
+
+    margin: 28px auto 48px;
+
+    overflow: hidden;
+
+    background: #eef2f6;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 34px rgba(15, 23, 42, 0.06);
+}
+
+.nexus-home-hero__image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transition:
+        opacity 650ms ease;
+
+    transform: none !important;
+}
+
+.nexus-home-hero__image.is-active {
+    opacity: 1;
+}
+
+.nexus-home-hero::after,
+.nexus-home-hero__content,
+.nexus-home-hero__glass,
+.nexus-home-hero h1,
+.nexus-home-hero p {
+    display: none !important;
+}
+
+/* Minimal slider indicators */
+
+.nexus-home-hero__dots {
+    position: absolute;
+
+    left: 50%;
+    bottom: 14px;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    transform: translateX(-50%);
+}
+
+.nexus-home-hero__dot {
+    width: 7px;
+    height: 7px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.65);
+
+    transition:
+        width 160ms ease,
+        background 160ms ease;
+}
+
+.nexus-home-hero__dot.is-active {
+    width: 19px;
+
+    background: #ffffff;
+}
+
+/* Kill remaining Moove demo content */
+
+body.pagelayout-frontpage
+[id*="marketing"],
+
+body.pagelayout-frontpage
+[class*="marketing"],
+
+body.pagelayout-frontpage
+[id*="feature"],
+
+body.pagelayout-frontpage
+[class*="feature"],
+
+body.pagelayout-frontpage
+[id*="testimonial"],
+
+body.pagelayout-frontpage
+[class*="testimonial"],
+
+body.pagelayout-frontpage
+[id*="stat"],
+
+body.pagelayout-frontpage
+[class*="stat"] {
+    display: none !important;
+}
+
+/* Light premium navbar */
+
+.navbar,
+.navbar.fixed-top {
+    background:
+        rgba(255, 255, 255, 0.94) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    box-shadow:
+        0 2px 12px rgba(15, 23, 42, 0.035);
+
+    backdrop-filter:
+        blur(14px) saturate(135%);
+
+    -webkit-backdrop-filter:
+        blur(14px) saturate(135%);
+}
+
+/* Minimal footer */
+
+.nexus-footer {
+    background: #ffffff;
+
+    color: #667085;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    padding:
+        28px 24px;
+}
+
+.nexus-footer__inner {
+    width: min(1180px, 100%);
+
+    margin: 0 auto;
+}
+
+.nexus-footer__logo {
+    display: block;
+
+    width: 150px;
+    height: auto;
+
+    margin-bottom: 16px;
+}
+
+.nexus-footer__bottom {
+    padding-top: 14px;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    color: #98a2b3;
+
+    font-size: 0.85rem;
+}
+
+/* Mobile */
+
+@media (max-width: 767.98px) {
+
+    .nexus-home-hero {
+        width:
+            calc(100% - 18px);
+
+        margin:
+            16px auto 28px;
+
+        border-radius:
+            14px;
+    }
+
+}
+
+
+/* =====================================================
+   SAFE MOOVE DEMO CLEANUP
+   Elements stay in DOM for Moodle/Moove JS.
+   ===================================================== */
+
+body.pagelayout-frontpage
+.nexus-hide-demo-section,
+
+body.pagelayout-frontpage
+.nexus-hide-demo-card {
+    display: none !important;
+}
+
+
+/* Do not expose empty demo spacing */
+
+body.pagelayout-frontpage
+.nexus-hide-demo-section + .nexus-hide-demo-section {
+    margin-top: 0 !important;
+}
+
+
+/* =====================================================
+   FINAL MINIMAL HERO
+   ===================================================== */
+
+body.pagelayout-frontpage
+.nexus-home-hero {
+    position: relative;
+
+    display: block;
+
+    width:
+        min(
+            calc(100% - 32px),
+            1320px
+        );
+
+    aspect-ratio: 16 / 9;
+
+    margin:
+        28px auto 42px;
+
+    overflow: hidden;
+
+    background: #f1f4f8;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.06);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 32px
+        rgba(15, 23, 42, 0.055);
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__image {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transform: none !important;
+
+    transition:
+        opacity 650ms ease;
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__image.is-active {
+    opacity: 1;
+}
+
+
+/* No overlay and no text */
+
+body.pagelayout-frontpage
+.nexus-home-hero::before,
+
+body.pagelayout-frontpage
+.nexus-home-hero::after,
+
+body.pagelayout-frontpage
+.nexus-home-hero__content,
+
+body.pagelayout-frontpage
+.nexus-home-hero__glass {
+    display: none !important;
+}
+
+
+/* Minimal indicators */
+
+body.pagelayout-frontpage
+.nexus-home-hero__dots {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__dot {
+    display: block;
+
+    width: 7px;
+    height: 7px;
+
+    min-width: 0;
+
+    padding: 0;
+
+    appearance: none;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.68);
+
+    box-shadow:
+        0 1px 4px
+        rgba(0, 0, 0, 0.10);
+
+    transition:
+        width 180ms ease,
+        background 180ms ease;
+}
+
+
+body.pagelayout-frontpage
+.nexus-home-hero__dot.is-active {
+    width: 20px;
+
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   NEXUS PREMIUM LOGIN + LANDING FINAL
+   ===================================================== */
+
+
+/* -----------------------------------------------------
+   GLOBAL DESIGN TOKENS
+   ----------------------------------------------------- */
+
+:root {
+    --nexus-blue: #1554b8;
+    --nexus-blue-dark: #0b326f;
+    --nexus-text: #172033;
+    --nexus-muted: #667085;
+    --nexus-border: rgba(15, 23, 42, 0.07);
+    --nexus-shadow:
+        0 18px 55px rgba(28, 52, 84, 0.09);
+}
+
+
+/* -----------------------------------------------------
+   LANDING PAGE BACKGROUND
+   ----------------------------------------------------- */
+
+body.pagelayout-frontpage {
+    background:
+        radial-gradient(
+            circle at 8% 8%,
+            rgba(104, 149, 255, 0.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 15%,
+            rgba(131, 214, 231, 0.14),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 55% 86%,
+            rgba(193, 169, 255, 0.10),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #fbfdff 0%,
+            #f6f9fd 55%,
+            #f8faff 100%
+        ) !important;
+}
+
+
+/* -----------------------------------------------------
+   LANDING NAVBAR
+   ----------------------------------------------------- */
+
+body.pagelayout-frontpage .navbar {
+    background:
+        rgba(255, 255, 255, 0.88) !important;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.055);
+
+    box-shadow:
+        0 5px 24px rgba(20, 41, 72, 0.04);
+
+    backdrop-filter:
+        blur(18px) saturate(145%);
+
+    -webkit-backdrop-filter:
+        blur(18px) saturate(145%);
+}
+
+
+/* -----------------------------------------------------
+   HERO
+   ----------------------------------------------------- */
+
+body.pagelayout-frontpage
+.nexus-home-hero {
+    width:
+        min(
+            calc(100% - 44px),
+            1260px
+        );
+
+    margin:
+        34px auto 64px;
+
+    border-radius:
+        22px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.70);
+
+    background:
+        #eef3f8;
+
+    box-shadow:
+        0 28px 70px
+        rgba(27, 51, 82, 0.11),
+        0 4px 16px
+        rgba(27, 51, 82, 0.04);
+}
+
+
+/* -----------------------------------------------------
+   LANDING FOOTER
+   ----------------------------------------------------- */
+
+#page-footer {
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    background:
+        transparent !important;
+}
+
+
+/*
+ * Keep only our Nexus footer.
+ */
+
+#page-footer > *:not(.nexus-footer) {
+    display: none !important;
+}
+
+
+.nexus-footer {
+    position: relative;
+
+    margin-top: 68px;
+
+    padding:
+        46px 34px 32px;
+
+    color:
+        #516072;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(247, 250, 255, 0.96),
+            rgba(238, 245, 255, 0.94)
+        );
+
+    border-top:
+        1px solid rgba(37, 75, 121, 0.07);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+
+.nexus-footer::before {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 180px;
+
+    left: 5%;
+    bottom: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(69, 123, 216, 0.08),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+.nexus-footer__inner {
+    position: relative;
+
+    z-index: 1;
+
+    width:
+        min(1180px, 100%);
+
+    margin:
+        0 auto;
+}
+
+
+.nexus-footer__logo {
+    width: 155px;
+
+    max-width: 55%;
+
+    height: auto;
+
+    margin-bottom: 22px;
+}
+
+
+.nexus-footer__bottom {
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(15, 23, 42, 0.07);
+
+    color:
+        #8792a2;
+
+    font-size:
+        0.86rem;
+}
+
+
+/* =====================================================
+   LOGIN PAGE
+   Separate from homepage
+   ===================================================== */
+
+
+/*
+ * Remove normal LMS/navbar presentation
+ * from the dedicated authentication screen.
+ */
+
+body#page-login-index .navbar,
+body#page-login-index .secondary-navigation {
+    display: none !important;
+}
+
+
+body#page-login-index {
+    min-height: 100vh;
+
+    margin: 0;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(91, 141, 239, 0.18),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(121, 210, 220, 0.17),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 60% 90%,
+            rgba(190, 164, 255, 0.13),
+            transparent 36%
+        ),
+        linear-gradient(
+            145deg,
+            #f9fbff 0%,
+            #eef5ff 48%,
+            #f8fbff 100%
+        ) !important;
+}
+
+
+/*
+ * Remove Moove's giant stock-photo login background.
+ */
+
+body#page-login-index #page,
+body#page-login-index #page-wrapper,
+body#page-login-index #page-content,
+body#page-login-index .login-wrapper,
+body#page-login-index .login-container,
+body#page-login-index [class*="login"] {
+    background-image:
+        none !important;
+}
+
+
+/*
+ * Main authentication viewport.
+ */
+
+body#page-login-index #page-wrapper {
+    min-height: 100vh !important;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        40px 20px !important;
+}
+
+
+body#page-login-index #page {
+    width: 100%;
+
+    min-height: 0 !important;
+
+    background:
+        transparent !important;
+}
+
+
+body#page-login-index #page-content {
+    width: 100%;
+
+    min-height: 0;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+}
+
+
+/*
+ * Moodle/Moove login wrapper.
+ */
+
+body#page-login-index
+.login-wrapper {
+    width: 100%;
+
+    min-height: 0 !important;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 !important;
+
+    background:
+        transparent !important;
+}
+
+
+/*
+ * Login card.
+ */
+
+body#page-login-index
+.login-container {
+    position: relative;
+
+    width:
+        min(440px, calc(100vw - 36px));
+
+    margin:
+        0 auto !important;
+
+    padding:
+        38px 38px 34px !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.78) !important;
+
+    border-radius:
+        22px !important;
+
+    background:
+        rgba(255, 255, 255, 0.91) !important;
+
+    box-shadow:
+        0 28px 80px rgba(24, 48, 83, 0.14),
+        0 4px 16px rgba(24, 48, 83, 0.05) !important;
+
+    backdrop-filter:
+        blur(22px) saturate(145%);
+
+    -webkit-backdrop-filter:
+        blur(22px) saturate(145%);
+}
+
+
+/*
+ * Added through nexus.js.
+ */
+
+.nexus-login-brand {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    margin-bottom: 26px;
+}
+
+
+.nexus-login-brand img {
+    display: block;
+
+    width: 165px;
+
+    max-width: 60%;
+
+    height: auto;
+
+    margin-bottom: 22px;
+}
+
+
+.nexus-login-brand__eyebrow {
+    margin-bottom:
+        7px;
+
+    color:
+        #667085;
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.04em;
+
+    text-transform:
+        uppercase;
+}
+
+
+.nexus-login-brand__title {
+    margin: 0;
+
+    color:
+        #172033;
+
+    font-size:
+        clamp(
+            1.55rem,
+            3vw,
+            2rem
+        );
+
+    font-weight:
+        700;
+
+    line-height:
+        1.16;
+
+    letter-spacing:
+        -0.025em;
+}
+
+
+.nexus-login-brand__subtitle {
+    margin:
+        10px 0 0;
+
+    color:
+        #6b7686;
+
+    font-size:
+        0.94rem;
+
+    line-height:
+        1.55;
+}
+
+
+/*
+ * Hide duplicate Moodle login heading.
+ */
+
+body#page-login-index
+.login-heading {
+    display:
+        none !important;
+}
+
+
+/* Input fields */
+
+body#page-login-index
+.form-control {
+    min-height:
+        48px;
+
+    padding:
+        11px 14px;
+
+    border:
+        1px solid rgba(40, 57, 78, 0.16);
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(255, 255, 255, 0.90);
+
+    color:
+        #172033;
+
+    box-shadow:
+        inset 0 1px 2px rgba(15, 23, 42, 0.02);
+
+    transition:
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        background 160ms ease;
+}
+
+
+body#page-login-index
+.form-control:focus {
+    border-color:
+        rgba(21, 84, 184, 0.65);
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(21, 84, 184, 0.09);
+}
+
+
+/* Login button */
+
+body#page-login-index
+.btn-primary {
+    min-height:
+        48px;
+
+    border:
+        0 !important;
+
+    border-radius:
+        11px !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1f66ce,
+            #124a9d
+        ) !important;
+
+    color:
+        #ffffff !important;
+
+    font-weight:
+        600;
+
+    box-shadow:
+        0 8px 22px rgba(21, 84, 184, 0.20) !important;
+
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
+}
+
+
+body#page-login-index
+.btn-primary:hover {
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 12px 28px rgba(21, 84, 184, 0.24) !important;
+}
+
+
+/*
+ * Login footer should be tiny/minimal.
+ */
+
+body#page-login-index
+#page-footer {
+    display:
+        none !important;
+}
+
+
+/* Remove Moove login decorations/background media */
+
+body#page-login-index
+.login-bg,
+body#page-login-index
+.login-background,
+body#page-login-index
+[class*="login-background"],
+body#page-login-index
+[class*="login-bg"] {
+    display:
+        none !important;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 767.98px) {
+
+    body.pagelayout-frontpage
+    .nexus-home-hero {
+        width:
+            calc(100% - 20px);
+
+        margin:
+            18px auto 38px;
+
+        border-radius:
+            17px;
+    }
+
+
+    .nexus-footer {
+        margin-top:
+            42px;
+
+        padding:
+            34px 20px 24px;
+    }
+
+
+    body#page-login-index
+    #page-wrapper {
+        padding:
+            22px 14px !important;
+    }
+
+
+    body#page-login-index
+    .login-container {
+        width:
+            min(100%, 430px);
+
+        padding:
+            30px 24px 26px !important;
+
+        border-radius:
+            18px !important;
+    }
+
+
+    .nexus-login-brand img {
+        width:
+            145px;
+    }
+
+}
+
+
+/* =====================================================
+   END NEXUS PREMIUM LOGIN + LANDING FINAL
+   ===================================================== */
+
