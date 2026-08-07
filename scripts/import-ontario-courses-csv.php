@@ -404,7 +404,33 @@ function nexus_import_course(
         $courseid = (int)$existing->id;
         $action = 'UPDATED';
     } else {
-        $course = create_course($coursedata);
+        try {
+            $course = create_course($coursedata);
+        } catch (Throwable $e) {
+            echo PHP_EOL;
+            echo "CREATE_COURSE FAILED" . PHP_EOL;
+            echo "==============================" . PHP_EOL;
+            echo "Course: " . ($coursedata->shortname ?? "UNKNOWN") . PHP_EOL;
+            echo "Category: " . ($coursedata->category ?? "NULL") . PHP_EOL;
+            echo "Fullname: " . ($coursedata->fullname ?? "NULL") . PHP_EOL;
+            echo "Shortname: " . ($coursedata->shortname ?? "NULL") . PHP_EOL;
+            echo "ID number: " . ($coursedata->idnumber ?? "NULL") . PHP_EOL;
+            echo "Exception: " . get_class($e) . PHP_EOL;
+            echo "Message: " . $e->getMessage() . PHP_EOL;
+
+            if (isset($e->errorcode)) {
+                echo "Error code: " . $e->errorcode . PHP_EOL;
+            }
+
+            if (isset($e->debuginfo)) {
+                echo "DEBUG INFO:" . PHP_EOL;
+                echo $e->debuginfo . PHP_EOL;
+            }
+
+            echo "==============================" . PHP_EOL;
+
+            throw $e;
+        }
 
         $courseid = (int)$course->id;
         $action = 'CREATED';
@@ -562,9 +588,25 @@ while (($values = fgetcsv($handle)) !== false) {
             nexus_normalize($row['code'] ?? 'UNKNOWN')
         );
 
-        echo "FAILED: {$code} — "
-            . $exception->getMessage()
-            . PHP_EOL;
+        echo PHP_EOL;
+        echo "================ IMPORT FAILURE ================" . PHP_EOL;
+        echo "COURSE: {$code}" . PHP_EOL;
+        echo "CLASS: " . get_class($exception) . PHP_EOL;
+        echo "MESSAGE: " . $exception->getMessage() . PHP_EOL;
+
+        if (property_exists($exception, 'errorcode')) {
+            echo "ERROR CODE: "
+                . $exception->errorcode
+                . PHP_EOL;
+        }
+
+        if (property_exists($exception, 'debuginfo')) {
+            echo "DEBUG INFO:" . PHP_EOL;
+            echo $exception->debuginfo . PHP_EOL;
+        }
+
+        echo "================================================" . PHP_EOL;
+        echo PHP_EOL;
 
         $failed++;
     }
