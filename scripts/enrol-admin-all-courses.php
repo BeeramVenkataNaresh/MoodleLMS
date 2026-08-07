@@ -3,22 +3,24 @@
 define('CLI_SCRIPT', true);
 
 require '/var/www/moodle/config.php';
-require_once $CFG->dirroot . '/enrol/locallib.php';
 
 global $DB;
 
-$username = 'admin';
+$username = $argv[1] ?? 'admin';
 
 $user = $DB->get_record(
     'user',
-    ['username' => $username, 'deleted' => 0],
+    [
+        'username' => $username,
+        'deleted' => 0,
+    ],
     '*',
     MUST_EXIST
 );
 
-$role = $DB->get_record(
+$studentrole = $DB->get_record(
     'role',
-    ['shortname' => 'editingteacher'],
+    ['shortname' => 'student'],
     '*',
     MUST_EXIST
 );
@@ -26,31 +28,42 @@ $role = $DB->get_record(
 $manual = enrol_get_plugin('manual');
 
 if (!$manual) {
-    throw new moodle_exception('Manual enrolment plugin is unavailable.');
+    throw new coding_exception(
+        'Manual enrolment plugin is unavailable.'
+    );
 }
 
 $courses = $DB->get_records_select(
     'course',
     'id <> :siteid',
     ['siteid' => SITEID],
-    'id ASC'
+    'shortname ASC'
 );
 
+$enrolled = 0;
+$existing = 0;
+$skipped = 0;
+
 foreach ($courses as $course) {
-    $instances = enrol_get_instances($course->id, true);
-    $manualinstance = null;
+    $instance = $DB->get_record(
+        'enrol',
+        [
+            'courseid' => $course->id,
+            'enrol' => 'manual',
+            'status' => ENROL_INSTANCE_ENABLED,
+        ]
+    );
 
-    foreach ($instances as $instance) {
-        if ($instance->enrol === 'manual') {
-            $manualinstance = $instance;
-            break;
-        }
-    }
+    if (!$instance) {
+        $instanceid = $manual->add_instance(
+            $course,
+            [
+                'status' => ENROL_INSTANCE_ENABLED,
+                'roleid' => $studentrole->id,
+            ]
+        );
 
-    if (!$manualinstance) {
-        $instanceid = $manual->add_instance($course);
-
-        $manualinstance = $DB->get_record(
+        $instance = $DB->get_record(
             'enrol',
             ['id' => $instanceid],
             '*',
@@ -58,20 +71,41 @@ foreach ($courses as $course) {
         );
     }
 
-    if (!$DB->record_exists('user_enrolments', [
-        'enrolid' => $manualinstance->id,
-        'userid' => $user->id,
-    ])) {
+    if (
+        is_enrolled(
+            context_course::instance($course->id),
+            $user,
+            '',
+            true
+        )
+    ) {
+        echo "EXISTS: {$course->shortname}" . PHP_EOL;
+        $existing++;
+        continue;
+    }
+
+    try {
         $manual->enrol_user(
-            $manualinstance,
+            $instance,
             $user->id,
-            $role->id
+            $studentrole->id,
+            0,
+            0,
+            ENROL_USER_ACTIVE
         );
 
         echo "ENROLLED: {$course->shortname}" . PHP_EOL;
-    } else {
-        echo "ALREADY ENROLLED: {$course->shortname}" . PHP_EOL;
+        $enrolled++;
+    } catch (Throwable $exception) {
+        echo "SKIPPED: {$course->shortname} — "
+            . $exception->getMessage()
+            . PHP_EOL;
+
+        $skipped++;
     }
 }
 
-echo PHP_EOL . 'Admin enrolment completed.' . PHP_EOL;
+echo PHP_EOL;
+echo "{$enrolled} new enrolments created." . PHP_EOL;
+echo "{$existing} existing enrolments retained." . PHP_EOL;
+echo "{$skipped} courses skipped." . PHP_EOL;
