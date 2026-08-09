@@ -5087,3 +5087,192 @@ body.pagelayout-frontpage
     }
 
 }
+
+/* NEXUS-HOMEPAGE-VIDEO-CSS-START */
+
+#nexus-homepage-video-slide {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #07182d;
+}
+
+#nexus-homepage-video-slide .nexus-homepage-carousel-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    object-position: center;
+    background: #07182d;
+}
+
+/* Keep video visually identical to existing Nexus hero images. */
+body#page-site-index .carousel-inner,
+body#page-site-index .carousel-item {
+    overflow: hidden;
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+    #nexus-homepage-video-slide .nexus-homepage-carousel-video {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+    #nexus-homepage-video-slide .nexus-homepage-carousel-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* Mobile */
+@media (max-width: 575px) {
+    #nexus-homepage-video-slide .nexus-homepage-carousel-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+/* NEXUS-HOMEPAGE-VIDEO-CSS-END */
+
+/* NEXUS-HOMEPAGE-VIDEO-SOUND-CSS-START */
+
+#nexus-homepage-video-slide {
+    position: relative;
+}
+
+.nexus-homepage-video-sound {
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+    z-index: 10;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+
+    background: rgba(8,28,54,.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.nexus-homepage-video-sound:hover {
+    transform: translateY(-1px);
+    background: rgba(8,28,54,.88);
+}
+
+.nexus-sound-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+@media (max-width: 575px) {
+
+    .nexus-homepage-video-sound {
+        right: 14px;
+        bottom: 14px;
+
+        padding: 9px 11px;
+    }
+
+    .nexus-sound-label {
+        display: none;
+    }
+}
+
+/* NEXUS-HOMEPAGE-VIDEO-SOUND-CSS-END */
+
+/* NEXUS-CROSS-BROWSER-VIDEO-AUDIO-CSS-START */
+
+#nexus-homepage-video-slide {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+#nexus-homepage-video-sound {
+    position: absolute !important;
+    right: 22px !important;
+    bottom: 22px !important;
+
+    z-index: 9999 !important;
+
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+
+    min-height: 44px !important;
+    padding: 10px 16px !important;
+
+    border: 1px solid rgba(255,255,255,.28) !important;
+    border-radius: 999px !important;
+
+    background: rgba(7,34,67,.82) !important;
+    color: #fff !important;
+
+    -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(14px) !important;
+
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+
+    box-shadow:
+        0 8px 28px rgba(0,0,0,.22) !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
+    pointer-events: auto !important;
+}
+
+#nexus-homepage-video-sound:hover {
+    background: rgba(7,34,67,.96) !important;
+}
+
+#nexus-homepage-video-sound:focus-visible {
+    outline: 3px solid rgba(255,255,255,.95) !important;
+    outline-offset: 3px !important;
+}
+
+@media (max-width: 575px) {
+    #nexus-homepage-video-sound {
+        right: 12px !important;
+        bottom: 12px !important;
+        min-height: 42px !important;
+        padding: 9px 12px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* NEXUS-CROSS-BROWSER-VIDEO-AUDIO-CSS-END */
