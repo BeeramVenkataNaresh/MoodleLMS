@@ -576,3 +576,407 @@ function installNexusFooter() {
     );
 }
 
+/* NEXUS-HOMEPAGE-VIDEO-SLIDE-START */
+(function () {
+    'use strict';
+
+    function addNexusHomepageVideoSlide() {
+        const body = document.body;
+
+        if (!body) {
+            return;
+        }
+
+        // Homepage only.
+        const isHomepage =
+            body.id === 'page-site-index' ||
+            body.classList.contains('path-site');
+
+        if (!isHomepage) {
+            return;
+        }
+
+        // Prevent duplicate insertion.
+        if (document.getElementById('nexus-homepage-video-slide')) {
+            return;
+        }
+
+        const carousels = Array.from(
+            document.querySelectorAll('.carousel')
+        );
+
+        const carousel = carousels.find((item) => {
+            const inner = item.querySelector('.carousel-inner');
+            return inner && inner.querySelectorAll('.carousel-item').length >= 2;
+        });
+
+        if (!carousel) {
+            return;
+        }
+
+        const inner = carousel.querySelector('.carousel-inner');
+
+        if (!inner) {
+            return;
+        }
+
+        const oldActive = inner.querySelector('.carousel-item.active');
+
+        if (oldActive) {
+            oldActive.classList.remove('active');
+        }
+
+        const slide = document.createElement('div');
+
+        slide.id = 'nexus-homepage-video-slide';
+        slide.className = 'carousel-item active nexus-video-carousel-item';
+
+        // Give the video slide a little longer than image slides.
+        slide.setAttribute('data-bs-interval', '12000');
+        slide.setAttribute('data-interval', '12000');
+
+        slide.innerHTML = `
+            <video
+                class="nexus-homepage-carousel-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Nexus Education Private School introduction video"
+            >
+                <source
+                    src="/theme/moove/media/homepage.mp4"
+                    type="video/mp4"
+                >
+            </video>
+        `;
+
+        inner.insertBefore(slide, inner.firstChild);
+
+        // Add a new first indicator while preserving the existing 4.
+        const indicators =
+            carousel.querySelector('.carousel-indicators');
+
+        if (indicators) {
+            const oldIndicators =
+                Array.from(indicators.children);
+
+            oldIndicators.forEach((indicator, index) => {
+                indicator.classList.remove('active');
+                indicator.removeAttribute('aria-current');
+
+                if (indicator.hasAttribute('data-bs-slide-to')) {
+                    indicator.setAttribute(
+                        'data-bs-slide-to',
+                        String(index + 1)
+                    );
+                }
+
+                if (indicator.hasAttribute('data-slide-to')) {
+                    indicator.setAttribute(
+                        'data-slide-to',
+                        String(index + 1)
+                    );
+                }
+            });
+
+            const indicator =
+                document.createElement('button');
+
+            indicator.type = 'button';
+            indicator.className = 'active';
+            indicator.setAttribute('aria-current', 'true');
+            indicator.setAttribute(
+                'aria-label',
+                'Video slide'
+            );
+
+            if (carousel.id) {
+                indicator.setAttribute(
+                    'data-bs-target',
+                    '#' + carousel.id
+                );
+
+                indicator.setAttribute(
+                    'data-target',
+                    '#' + carousel.id
+                );
+            }
+
+            indicator.setAttribute(
+                'data-bs-slide-to',
+                '0'
+            );
+
+            indicator.setAttribute(
+                'data-slide-to',
+                '0'
+            );
+
+            indicators.insertBefore(
+                indicator,
+                indicators.firstChild
+            );
+        }
+
+        const video =
+            slide.querySelector('video');
+
+        if (video) {
+            video.muted = true;
+
+            const playVideo = () => {
+                video.play().catch(() => {});
+            };
+
+            playVideo();
+
+            carousel.addEventListener(
+                'slid.bs.carousel',
+                () => {
+                    if (slide.classList.contains('active')) {
+                        playVideo();
+                    } else {
+                        video.pause();
+                    }
+                }
+            );
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            addNexusHomepageVideoSlide,
+            {once: true}
+        );
+    } else {
+        addNexusHomepageVideoSlide();
+    }
+})();
+ /* NEXUS-HOMEPAGE-VIDEO-SLIDE-END */
+
+/* NEXUS-HOMEPAGE-VIDEO-SOUND-START */
+(function () {
+    'use strict';
+
+    function initNexusVideoSound() {
+        const video =
+            document.querySelector(
+                '#nexus-homepage-video-slide .nexus-homepage-carousel-video'
+            );
+
+        const slide =
+            document.getElementById(
+                'nexus-homepage-video-slide'
+            );
+
+        if (!video || !slide) {
+            return;
+        }
+
+        if (
+            document.getElementById(
+                'nexus-homepage-video-sound'
+            )
+        ) {
+            return;
+        }
+
+        video.muted = true;
+        video.volume = 1;
+
+        const button =
+            document.createElement('button');
+
+        button.id =
+            'nexus-homepage-video-sound';
+
+        button.type =
+            'button';
+
+        button.className =
+            'nexus-homepage-video-sound';
+
+        button.setAttribute(
+            'aria-label',
+            'Turn video sound on'
+        );
+
+        button.innerHTML = `
+            <span class="nexus-sound-icon">🔇</span>
+            <span class="nexus-sound-label">Sound on</span>
+        `;
+
+        slide.appendChild(button);
+
+        button.addEventListener(
+            'click',
+            async () => {
+                try {
+                    video.muted = !video.muted;
+
+                    if (!video.muted) {
+                        video.volume = 1;
+                        await video.play();
+
+                        button.innerHTML = `
+                            <span class="nexus-sound-icon">🔊</span>
+                            <span class="nexus-sound-label">Sound off</span>
+                        `;
+
+                        button.setAttribute(
+                            'aria-label',
+                            'Turn video sound off'
+                        );
+                    } else {
+                        button.innerHTML = `
+                            <span class="nexus-sound-icon">🔇</span>
+                            <span class="nexus-sound-label">Sound on</span>
+                        `;
+
+                        button.setAttribute(
+                            'aria-label',
+                            'Turn video sound on'
+                        );
+                    }
+                } catch (error) {
+                    console.warn(
+                        'Nexus video audio could not start:',
+                        error
+                    );
+                }
+            }
+        );
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initNexusVideoSound,
+            {once: true}
+        );
+    } else {
+        initNexusVideoSound();
+    }
+})();
+ /* NEXUS-HOMEPAGE-VIDEO-SOUND-END */
+
+/* NEXUS-CROSS-BROWSER-VIDEO-AUDIO-START */
+(function () {
+    'use strict';
+
+    const VIDEO_SELECTOR =
+        '#nexus-homepage-video-slide .nexus-homepage-carousel-video';
+
+    const SLIDE_SELECTOR =
+        '#nexus-homepage-video-slide';
+
+    const BUTTON_ID =
+        'nexus-homepage-video-sound';
+
+    function updateButton(button, video) {
+        const isMuted = video.muted;
+
+        button.setAttribute(
+            'aria-label',
+            isMuted ? 'Play video with sound' : 'Mute video'
+        );
+
+        button.innerHTML = isMuted
+            ? '<span aria-hidden="true">🔇</span><span>Sound on</span>'
+            : '<span aria-hidden="true">🔊</span><span>Sound off</span>';
+    }
+
+    function mountSoundButton() {
+        const slide = document.querySelector(SLIDE_SELECTOR);
+        const video = document.querySelector(VIDEO_SELECTOR);
+
+        if (!slide || !video) {
+            return false;
+        }
+
+        if (document.getElementById(BUTTON_ID)) {
+            return true;
+        }
+
+        slide.style.position = 'relative';
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.volume = 1;
+
+        const button = document.createElement('button');
+
+        button.id = BUTTON_ID;
+        button.type = 'button';
+        button.className = 'nexus-homepage-video-sound';
+        button.setAttribute('aria-live', 'polite');
+
+        updateButton(button, video);
+
+        button.addEventListener('click', async function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            try {
+                if (video.muted) {
+                    video.muted = false;
+                    video.defaultMuted = false;
+                    video.volume = 1;
+
+                    await video.play();
+                } else {
+                    video.muted = true;
+                }
+
+                updateButton(button, video);
+            } catch (error) {
+                console.error(
+                    'Nexus hero audio playback failed:',
+                    error
+                );
+
+                video.muted = true;
+                updateButton(button, video);
+            }
+        });
+
+        slide.appendChild(button);
+
+        return true;
+    }
+
+    function init() {
+        if (mountSoundButton()) {
+            return;
+        }
+
+        const observer = new MutationObserver(function () {
+            if (mountSoundButton()) {
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true
+        });
+
+        window.setTimeout(function () {
+            observer.disconnect();
+        }, 15000);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            init,
+            { once: true }
+        );
+    } else {
+        init();
+    }
+})();
+/* NEXUS-CROSS-BROWSER-VIDEO-AUDIO-END */
