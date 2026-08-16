@@ -47,9 +47,14 @@ COPY docker/scripts/moodle-install.sh /usr/local/bin/nexus-moodle-install
 COPY docker/scripts/configure-moodle.php /usr/local/bin/nexus-configure-moodle.php
 COPY docker/scripts/moodle-cron.sh /usr/local/bin/nexus-moodle-cron
 
-RUN chmod +x /usr/local/bin/nexus-moodle-entrypoint \
-    /usr/local/bin/nexus-moodle-install \
-    /usr/local/bin/nexus-moodle-cron
+RUN sed -i 's/\r$//' \
+        /usr/local/bin/nexus-moodle-entrypoint \
+        /usr/local/bin/nexus-moodle-install \
+        /usr/local/bin/nexus-moodle-cron \
+    && chmod +x \
+        /usr/local/bin/nexus-moodle-entrypoint \
+        /usr/local/bin/nexus-moodle-install \
+        /usr/local/bin/nexus-moodle-cron
 
 WORKDIR /var/www/moodle
 ENTRYPOINT ["/usr/local/bin/nexus-moodle-entrypoint"]
